@@ -27,9 +27,7 @@
   "engines": {
     "node": ">=10"
   },
-  "dependencies": {
-    "dotenv": "^16.4.5"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "2.0.2",
     "@nomiclabs/hardhat-waffle": "2.0.1",
@@ -40,6 +38,7 @@
     "@types/mocha": "^10.0.6",
     "chai": "^4.4.1",
     "decimal.js": "^10.2.1",
+    "dotenv": "^16.4.5",
     "ethereum-waffle": "^4.0.10",
     "ethers": "5.7.2",
     "hardhat": "2.22.4",
