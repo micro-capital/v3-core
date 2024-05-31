@@ -5,6 +5,11 @@ import '@nomiclabs/hardhat-ethers'
 
 import '@solarity/hardhat-migrate'
 
+import * as dotenv from 'dotenv'
+dotenv.config()
+
+const accounts = process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : undefined
+
 import { HardhatUserConfig } from 'hardhat/config'
 
 const config: HardhatUserConfig = {
