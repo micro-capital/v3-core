@@ -24,8 +24,10 @@ contract NoDelegateCallTest is NoDelegateCall {
         return gasBefore - gasleft();
     }
 
-    function callsIntoNoDelegateCallFunction() external view {
+    function callsIntoNoDelegateCallFunction() external view returns (uint256) {
         noDelegateCallPrivate();
+
+        return 0;
     }
 
     function noDelegateCallPrivate() private view noDelegateCall {}

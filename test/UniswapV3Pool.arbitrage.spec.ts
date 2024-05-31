@@ -1,9 +1,9 @@
 import Decimal from 'decimal.js'
 import { BigNumber, BigNumberish, Wallet } from 'ethers'
 import { ethers, waffle } from 'hardhat'
-import { MockTimeUniswapV3Pool } from '../typechain/MockTimeUniswapV3Pool'
-import { TickMathTest } from '../typechain/TickMathTest'
-import { UniswapV3PoolSwapTest } from '../typechain/UniswapV3PoolSwapTest'
+import { MockTimeUniswapV3Pool } from '../typechain'
+import { TickMathTest } from '../typechain'
+import { UniswapV3PoolSwapTest } from '../typechain'
 import { expect } from './shared/expect'
 
 import { poolFixture } from './shared/fixtures'

@@ -1,6 +1,6 @@
 import { Wallet } from 'ethers'
 import { ethers, waffle } from 'hardhat'
-import { NoDelegateCallTest } from '../typechain/NoDelegateCallTest'
+import { NoDelegateCallTest } from '../typechain'
 import { expect } from './shared/expect'
 import snapshotGasCost from './shared/snapshotGasCost'
 
