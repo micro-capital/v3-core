@@ -1,10 +1,10 @@
 import { Decimal } from 'decimal.js'
 import { BigNumber, BigNumberish, ContractTransaction, Wallet } from 'ethers'
 import { ethers, waffle } from 'hardhat'
-import { MockTimeUniswapV3Pool } from '../typechain/MockTimeUniswapV3Pool'
-import { TestERC20 } from '../typechain/TestERC20'
+import { MockTimeUniswapV3Pool } from '../typechain'
+import { TestERC20 } from '../typechain'
 
-import { TestUniswapV3Callee } from '../typechain/TestUniswapV3Callee'
+import { TestUniswapV3Callee } from '../typechain'
 import { expect } from './shared/expect'
 import { poolFixture } from './shared/fixtures'
 import { formatPrice, formatTokenAmount } from './shared/format'
@@ -510,7 +510,7 @@ describe('UniswapV3Pool swap tests', () => {
           const tx = executeSwap(pool, testCase, poolFunctions)
           try {
             await tx
-          } catch (error) {
+          } catch (error: any) {
             expect({
               swapError: error.message,
               poolBalance0: poolBalance0.toString(),

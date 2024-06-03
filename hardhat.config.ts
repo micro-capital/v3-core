@@ -1,9 +1,18 @@
-import 'hardhat-typechain'
-import '@nomiclabs/hardhat-ethers'
-import '@nomiclabs/hardhat-waffle'
-import '@nomiclabs/hardhat-etherscan'
+import '@typechain/hardhat'
 
-export default {
+import '@nomiclabs/hardhat-waffle'
+import '@nomiclabs/hardhat-ethers'
+
+import '@solarity/hardhat-migrate'
+
+import * as dotenv from 'dotenv'
+dotenv.config()
+
+const accounts = process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : undefined
+
+import { HardhatUserConfig } from 'hardhat/config'
+
+const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       allowUnlimitedContractSize: false,
@@ -50,6 +59,7 @@ export default {
     // Obtain one at https://etherscan.io/
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
+  mocha: {},
   solidity: {
     version: '0.7.6',
     settings: {
@@ -65,4 +75,12 @@ export default {
       },
     },
   },
+  typechain: {
+    outDir: 'typechain',
+    target: 'ethers-v5',
+    alwaysGenerateOverloads: true,
+    discriminateTypes: true,
+  },
 }
+
+export default config
