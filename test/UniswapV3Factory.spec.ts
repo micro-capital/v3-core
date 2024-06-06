@@ -60,6 +60,10 @@ describe('UniswapV3Factory', () => {
     expect(await factory.feeAmountTickSpacing(FeeAmount.HIGH)).to.eq(TICK_SPACINGS[FeeAmount.HIGH])
   })
 
+  it('should revert if trying to create pool by not owner', async () => {
+    await expect(factory.connect(other).createPool(TEST_ADDRESSES[0], TEST_ADDRESSES[1], FeeAmount.MEDIUM)).to.be.reverted;
+  });
+
   async function createAndCheckPool(
     tokens: [string, string],
     feeAmount: FeeAmount,
