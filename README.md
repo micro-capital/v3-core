@@ -7,7 +7,7 @@
 [![npm version](https://img.shields.io/npm/v/@uniswap/v3-core/latest.svg)](https://www.npmjs.com/package/@uniswap/v3-core/v/latest)
 
 This repository contains the core smart contracts for the Uniswap V3 Protocol.
-For higher level contracts, see the [uniswap-v3-periphery](https://github.com/Uniswap/uniswap-v3-periphery)
+For higher level contracts, see the [uniswap-v3-periphery](https://github.com/micro-capital/v3-periphery)
 repository.
 
 ## Usage 
