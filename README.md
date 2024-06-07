@@ -7,12 +7,58 @@
 [![npm version](https://img.shields.io/npm/v/@uniswap/v3-core/latest.svg)](https://www.npmjs.com/package/@uniswap/v3-core/v/latest)
 
 This repository contains the core smart contracts for the Uniswap V3 Protocol.
-For higher level contracts, see the [uniswap-v3-periphery](https://github.com/Uniswap/uniswap-v3-periphery)
+For higher level contracts, see the [uniswap-v3-periphery](https://github.com/micro-capital/v3-periphery)
 repository.
 
-## Bug bounty
+## Usage 
 
-This repository is subject to the Uniswap V3 bug bounty program, per the terms defined [here](./bug-bounty.md).
+In order to run tests, first of all you need to install dependencies:
+
+```bash
+yarn install
+```
+
+If you do not have `yarn` installed, you can install it by running, please refer to the [yarn documentation](https://classic.yarnpkg.com/en/docs/install):
+
+Then you can run tests:
+
+```bash
+yarn test
+```
+
+### Deployment 
+
+> For seamless and full Uniswap V3 deployment, please refer to the [Uniswap V3 deployment scripts](https://github.com/micro-capital/deploy-v3).
+> Below is a general guide on how to deploy ONLY the Uniswap V3 core contracts.
+
+To deploy the Uniswap V3 core contracts, you can use the deployment scripts in the `scripts` directory.
+
+First of all, you need to create a `.env` file in the root directory of the repository. You can use the `.env.example` file as a template.
+
+### Environment Variables for Uniswap EVM Contract Deployment
+
+Here's a general explanation of the environment variables used for deploying Uniswap EVM contracts:
+
+#### Deployer Private Keys
+- `PRIVATE_KEY`: The private key of the account that will be used to deploy the contracts on the Ethereum network.
+  (**Must have sufficient balance to cover transaction fees**; Must be in Hexadecimal format, e.g: `1234567890abcdef...`)
+
+#### RPC Configuration
+- `INFURA_API_KEY`: This variable should hold your Infura project ID. You need to sign up for an Infura account and create a project to obtain the project ID.
+
+#### Etherscan Configuration
+- `ETHERSCAN_API_KEY`: The Etherscan API key is used to verify deployed contracts on Etherscan.
+
+#### Uniswap Contract Configuration
+- `FACTORY_OWNER`: This variable specifies the address of the owner of the Uniswap V3 Factory contract.
+
+### Deployment Script 
+
+After the `.env` file is created, you can run the deployment script for the network you want to deploy to, for example:
+
+```bash
+yarn hardhat migrate --network sepolia --verify
+```
 
 ## Local deployment
 
