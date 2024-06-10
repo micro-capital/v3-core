@@ -10,6 +10,10 @@ This repository contains the core smart contracts for the Uniswap V3 Protocol.
 For higher level contracts, see the [uniswap-v3-periphery](https://github.com/micro-capital/v3-periphery)
 repository.
 
+## Changelog
+
+- The `createPool` function in the `UniswapV3Factory` contract can now be called only by the owner.
+
 ## Usage 
 
 In order to run tests, first of all you need to install dependencies:
