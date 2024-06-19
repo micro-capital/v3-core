@@ -49,19 +49,17 @@ describe('UniswapV3Factory', () => {
   })
 
   it('pool bytecode size', async () => {
-    await factory.createPool(TEST_ADDRESSES[0], TEST_ADDRESSES[1], FeeAmount.MEDIUM)
-    const poolAddress = getCreate2Address(factory.address, TEST_ADDRESSES, FeeAmount.MEDIUM, poolBytecode)
+    await factory.createPool(TEST_ADDRESSES[0], TEST_ADDRESSES[1], FeeAmount.HIGH)
+    const poolAddress = getCreate2Address(factory.address, TEST_ADDRESSES, FeeAmount.HIGH, poolBytecode)
     expect(((await waffle.provider.getCode(poolAddress)).length - 2) / 2).to.matchSnapshot()
   })
 
   it('initial enabled fee amounts', async () => {
-    expect(await factory.feeAmountTickSpacing(FeeAmount.LOW)).to.eq(TICK_SPACINGS[FeeAmount.LOW])
-    expect(await factory.feeAmountTickSpacing(FeeAmount.MEDIUM)).to.eq(TICK_SPACINGS[FeeAmount.MEDIUM])
     expect(await factory.feeAmountTickSpacing(FeeAmount.HIGH)).to.eq(TICK_SPACINGS[FeeAmount.HIGH])
   })
 
   it('should revert if trying to create pool by not owner', async () => {
-    await expect(factory.connect(other).createPool(TEST_ADDRESSES[0], TEST_ADDRESSES[1], FeeAmount.MEDIUM)).to.be.reverted;
+    await expect(factory.connect(other).createPool(TEST_ADDRESSES[0], TEST_ADDRESSES[1], FeeAmount.HIGH)).to.be.reverted;
   });
 
   async function createAndCheckPool(
@@ -91,29 +89,22 @@ describe('UniswapV3Factory', () => {
   }
 
   describe('#createPool', () => {
-    it('succeeds for low fee pool', async () => {
-      await createAndCheckPool(TEST_ADDRESSES, FeeAmount.LOW)
-    })
-
-    it('succeeds for medium fee pool', async () => {
-      await createAndCheckPool(TEST_ADDRESSES, FeeAmount.MEDIUM)
-    })
     it('succeeds for high fee pool', async () => {
       await createAndCheckPool(TEST_ADDRESSES, FeeAmount.HIGH)
     })
 
     it('succeeds if tokens are passed in reverse', async () => {
-      await createAndCheckPool([TEST_ADDRESSES[1], TEST_ADDRESSES[0]], FeeAmount.MEDIUM)
+      await createAndCheckPool([TEST_ADDRESSES[1], TEST_ADDRESSES[0]], FeeAmount.HIGH)
     })
 
     it('fails if token a == token b', async () => {
-      await expect(factory.createPool(TEST_ADDRESSES[0], TEST_ADDRESSES[0], FeeAmount.LOW)).to.be.reverted
+      await expect(factory.createPool(TEST_ADDRESSES[0], TEST_ADDRESSES[0], FeeAmount.HIGH)).to.be.reverted
     })
 
     it('fails if token a is 0 or token b is 0', async () => {
-      await expect(factory.createPool(TEST_ADDRESSES[0], constants.AddressZero, FeeAmount.LOW)).to.be.reverted
-      await expect(factory.createPool(constants.AddressZero, TEST_ADDRESSES[0], FeeAmount.LOW)).to.be.reverted
-      await expect(factory.createPool(constants.AddressZero, constants.AddressZero, FeeAmount.LOW)).to.be.revertedWith(
+      await expect(factory.createPool(TEST_ADDRESSES[0], constants.AddressZero, FeeAmount.HIGH)).to.be.reverted
+      await expect(factory.createPool(constants.AddressZero, TEST_ADDRESSES[0], FeeAmount.HIGH)).to.be.reverted
+      await expect(factory.createPool(constants.AddressZero, constants.AddressZero, FeeAmount.HIGH)).to.be.revertedWith(
         ''
       )
     })
@@ -123,7 +114,7 @@ describe('UniswapV3Factory', () => {
     })
 
     it('gas', async () => {
-      await snapshotGasCost(factory.createPool(TEST_ADDRESSES[0], TEST_ADDRESSES[1], FeeAmount.MEDIUM))
+      await snapshotGasCost(factory.createPool(TEST_ADDRESSES[0], TEST_ADDRESSES[1], FeeAmount.HIGH))
     })
   })
 
